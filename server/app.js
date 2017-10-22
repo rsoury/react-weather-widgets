@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import colors from 'colors';
 import routes from './routes';
+import config from '../webpack.config.babel';
 
 dotenv.config();
 
@@ -23,55 +24,35 @@ if(!test){
 		stream: fs.createWriteStream('./access.log', {flags: 'a'})
 	}));
 
-	//Expiry Headers
-	app.use((req, res, next) => {
-	  const maxAge = 31557600;
-	  if (!res.getHeader('Cache-Control')){
-	    res.setHeader('Cache-Control', 'public, max-age=' + (maxAge / 1000));
-	  }
-	  next();
-	});
+//Expiry Headers
+app.use((req, res, next) => {
+	const maxAge = 31557600;
+	if (!res.getHeader('Cache-Control')){
+		res.setHeader('Cache-Control', 'public, max-age=' + (maxAge / 1000));
+	}
+	next();
+});
 }else{
+	const compiler = webpack(config);
+
 	app.use(require('webpack-dev-middleware')(compiler, {
-	  noInfo: true,
-	  publicPath: config.output.publicPath
+		noInfo: true,
+		publicPath: config.output.publicPath
 	}));
 
 	app.use(require('webpack-hot-middleware')(compiler));
 }
 
+// Handle server routes
 routes(app);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-	const err = new Error('Not Found');
-	err.status = 404;
-	next(err);
-});
-
-// error handlers
-
-// production error handler
-// no stacktraces leaked to user
-app.use((err, req, res, next) => {
-	opbeat.captureError(err);
-	res.status(err.status || 500);
-	res.json(
-		test ? {
-			object: "error",
-			type: err.status,
-			message: err.message,
-			trace: err
-		} : {
-			object: "error",
-			type: err.status,
-			message: err.message
-		}
-		);
+// Let React-router handle other routes
+app.get('*', (req, res, next) => {
+	res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {
-	console.log(`We are live on ${port}`.green);
+	console.log(`We are live on ${port} - in ${test ? 'development' : 'production'} mode`.green);
 });
 
 export default app;
