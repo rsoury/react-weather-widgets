@@ -28,11 +28,7 @@ export default {
 			path.resolve(__dirname, 'node_modules'),
 			'node_modules'
 		],
-		extensions: ['.jsx', '.js', '.json'],
-		alias: {
-			'local-api': path.resolve(__dirname, (devEnv ? 'src/api/mock' : 'src/api')),
-			'local-helper': path.resolve(__dirname, (devEnv ? 'src/helper/mock' : 'src/helper'))
-		}
+		extensions: ['.jsx', '.js', '.json']
 	},
 	devServer: { //This is where our code is.
 		contentBase: './src'
