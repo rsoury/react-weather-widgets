@@ -2,6 +2,7 @@
 	box-sizing: border-box
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-family 'Helvetica', sans-serif
 #app
 	background-color: rgb(240, 240, 240) !important;
 	position: absolute;
@@ -47,5 +48,34 @@ header
 	display: inline-block;
 	margin: 5px;
 	border: 1px solid rgb(180, 180, 180);
-	padding: 10px;
 	background-color: #fff;
+	width 500px
+	text-align center
+	border-radius 4px
+	& .widget-header
+		padding 10px;
+		background-color rgb(30, 30, 30)
+		color #fff
+	& .widget-body
+		padding 10px
+		& > table td
+			width 33.33%
+		& .widget-primary-icon
+			max-width 200px
+		& .widget-primary-temp
+			font-size 56px
+	& .widget-daily
+		padding 10px 0
+		border-top 1px solid rgb(230, 230, 230)
+		& .widget-day
+			margin-bottom 5px
+			opacity 0.5
+		& table td
+			border-right: 1px solid rgb(230, 230, 230);
+			&:last-child
+				border none
+	& .widget-loader
+		position relative
+		top 50%
+		transform translateY(-50%)
+	
