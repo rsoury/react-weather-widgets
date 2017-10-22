@@ -3,11 +3,33 @@
   "version": "1.0.0",
   "description": "Basic ES6 Lint/Hint Config",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "npm-run-all --parallel dev lint:watch",
+    "dev": "nodemon --delay 1 server/app.js --exec \"node --require dotenv/config --require babel-register\"",
+    "lint": "node_modules/.bin/esw *.js",
+    "lint:watch": "npm run lint -- --watch",
+    "build": "cross-env ENV=production webpack --progress",
+    "prod": "cross-env ENV=production node --require dotenv/config --require babel-register server/app.js"
   },
   "author": "Ryan Soury",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "colors": "^1.1.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "request": "^2.83.0",
+    "superagent": "^3.7.0",
+    "webpack": "^3.8.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
