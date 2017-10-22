@@ -20,6 +20,10 @@ class HomePage extends Component{
 		console.log(nextProps);
 	}
 
+	closeWidget = id => {
+		this.props.actions.removeWidget(id);
+	}
+
 	render(){
 		return (
 			<main>
@@ -27,7 +31,7 @@ class HomePage extends Component{
 				<div className="widget-area">
 					{
 						this.props.widgets.map((widget, key) => {
-							return <Widget key={key} id={key} {...widget} />
+							return <Widget key={key} id={key} {...widget} onClose={this.closeWidget} />
 						})
 					}
 				</div>

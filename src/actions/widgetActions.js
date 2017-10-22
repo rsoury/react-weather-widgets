@@ -8,6 +8,9 @@ export function loadWidgetWeatherSuccess(results){
 export function loadWidgetCitiesSuccess(results){
 	return { type: types.LOAD_WIDGET_CITIES_SUCCESS, results };
 }
+export function removeWidgetSuccess(key){
+	return { type: types.REMOVE_WIDGET, key };
+}
 
 export function loadWidgetWeather(key, cityCoords){
 	return dispatch => {
@@ -18,7 +21,7 @@ export function loadWidgetWeather(key, cityCoords){
 			.catch(err => {
 				throw(err);
 			});
-	}
+	};
 }
 
 export function loadWidgetCities(key, country){
@@ -30,5 +33,11 @@ export function loadWidgetCities(key, country){
 			.catch(err => {
 				throw(err);
 			});
-	}
+	};
+}
+
+export function removeWidget(key){
+	return dispatch => {
+		dispatch(removeWidgetSuccess(key));
+	};
 }

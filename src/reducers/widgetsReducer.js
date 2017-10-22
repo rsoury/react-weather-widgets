@@ -12,6 +12,11 @@ export default function widgetsReducer(state=initialState.widgets, action){
 		case types.LOAD_WIDGET_CITIES_SUCCESS : {
 			return state;
 		}
+		case types.REMOVE_WIDGET : {
+			const newState = [...state];
+			newState.splice(action.key,  -1);
+			return newState;
+		}
 		default: {
 			return state;
 		}
