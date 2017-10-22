@@ -18,6 +18,8 @@ header
 	border-top: 0;
 	box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 	border-radius 0 0 4px 4px
+	position relative
+	z-index 100
 	& > div
 		width: 50%;
 		display: inline-block;
@@ -40,3 +42,10 @@ header
 				cursor pointer
 			&:active
 				background-color rgb(180, 180, 180) !important
+				
+.widget
+	display: inline-block;
+	margin: 5px;
+	border: 1px solid rgb(180, 180, 180);
+	padding: 10px;
+	background-color: #fff;

@@ -9,11 +9,11 @@ export function loadWidgetCitiesSuccess(results){
 	return { type: types.LOAD_WIDGET_CITIES_SUCCESS, results };
 }
 
-export function loadWidgetWeather(cityCoords){
+export function loadWidgetWeather(key, cityCoords){
 	return dispatch => {
 		return WeatherApi.getWeather(cityCoords)
-			.then(results => {
-				dispatch(loadWidgetWeatherSuccess(results));
+			.then(data => {
+				dispatch(loadWidgetWeatherSuccess({ key, data }));
 			})
 			.catch(err => {
 				throw(err);
@@ -21,11 +21,11 @@ export function loadWidgetWeather(cityCoords){
 	}
 }
 
-export function loadWidgetCities(country){
+export function loadWidgetCities(key, country){
 	return dispatch => {
 		return CountryApi.getCities(country)
-			.then(results => {
-				dispatch(loadWidgetCitiesSuccess(results));
+			.then(data => {
+				dispatch(loadWidgetCitiesSuccess({ key, data }));
 			})
 			.catch(err => {
 				throw(err);

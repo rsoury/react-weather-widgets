@@ -28,13 +28,11 @@ class Header extends Component{
 		return (
 			<header>
 				<div>
-					<select onChange={this.onChange}>
+					<select onChange={this.onChange} defaultValue={this.state.selected.code}>
 						{
-							countries.map(({ name, code }) => {
-								return code === this.state.selected.code ? (
-									<option value={code} selected>{name}</option>
-								) : (
-									<option value={code}>{name}</option>
+							countries.map(({ name, code }, key) => {
+								return (
+									<option key={key} value={code}>{name}</option>
 								);
 							})
 						}
